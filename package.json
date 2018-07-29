@@ -1,0 +1,11 @@
+{
+  "name": "webstores-price-compare",
+  "version": "1.0.0",
+  "description": "An app that allows to compare prices on most popular webstores",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon"
+  },
+  "author": "CJ Moro",
+  "license": "ISC"
+}
