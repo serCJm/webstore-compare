@@ -2,7 +2,8 @@
 const http = require('http'),
     fs = require('fs'),
     dotenv = require('dotenv').config()
-    url = require('url');
+    url = require('url'),
+    request = require('request');
 
 const walmartAPI = process.env.WALMARTAPI;
 
@@ -38,10 +39,17 @@ const server = http.createServer(function (req, res) {
     } else if (req.url === '/walmart') {
         // walmart search API query
         let query = `http://api.walmartlabs.com/v1/search?apiKey=${walmartAPI}&query=${search}`;
-        res.writeHead(200, {
-            'Content-Type': 'application/json'
-        });
-        res.end(JSON.stringify({'hi': "hi"}));
+        console.log(query);
+        request(query, function (error, response, body) {
+            console.log('error:', error); // Print the error if one occurred
+            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+            console.log('body:', body); // Print the HTML for the Google homepage.
+            
+            res.writeHead(200, {
+                'Content-Type': 'application/json'
+            });
+            res.end(body);
+          });
     }
 
     // handle all non-existing routes
