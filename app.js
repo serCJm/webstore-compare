@@ -39,17 +39,22 @@ const server = http.createServer(function (req, res) {
     } else if (req.url === '/walmart') {
         // walmart search API query
         let query = `http://api.walmartlabs.com/v1/search?apiKey=${walmartAPI}&query=${search}`;
-        console.log(query);
+        // make API call from server
         request(query, function (error, response, body) {
+            if (error) {
             console.log('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-            console.log('body:', body); // Print the HTML for the Google homepage.
-            
+            }
+            console.log('API call statusCode:', response && response.statusCode); // Print the response status code if a response was received
+            // send the result of request call back to client
             res.writeHead(200, {
                 'Content-Type': 'application/json'
             });
             res.end(body);
           });
+    } else if (req.url === '/ebay') {
+        console.log('ebay');
+    } else if (req.url === '/amazon') {
+        console.log('amazon');
     }
 
     // handle all non-existing routes

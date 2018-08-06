@@ -7,11 +7,27 @@ window.onload = function () {
         input.value = '';
     })();
 
+    // set default store API request option
+    let store = 'walmart';
+
+    // set a store option depending on user's choice
+    (function setStoreOption() {
+        const options = document.querySelectorAll('.option');
+        for (let i = 0; i < options.length; i++) {
+            // change store option on click
+            options[i].addEventListener('click', function(e) {
+                e.preventDefault();
+                store = this.text.toLowerCase();
+                console.log(store);
+            })
+        }
+    })();
+
     const searchBtn = document.querySelector('.search-btn');
     searchBtn.addEventListener('click', function (e) {
         e.preventDefault();
         // build a query from input
-        let query = `/walmart?search=${input.value}`
+        let query = `/${store}?search=${input.value}`
         console.log(query);
         sendQuery(query);
     });
