@@ -2,10 +2,11 @@
 const http = require('http'),
     fs = require('fs'),
     dotenv = require('dotenv').config()
-    url = require('url'),
+url = require('url'),
     request = require('request');
 
 const walmartAPI = process.env.WALMARTAPI;
+const ebayAPI = process.env.EBAYAPI;
 
 // create a server
 const server = http.createServer(function (req, res) {
@@ -38,21 +39,13 @@ const server = http.createServer(function (req, res) {
         fs.createReadStream(__dirname + '/public/stylesheets/styles.css').pipe(res).on('error', errorHandler);
     } else if (req.url === '/walmart') {
         // walmart search API query
-        let query = `http://api.walmartlabs.com/v1/search?apiKey=${walmartAPI}&query=${search}`;
-        // make API call from server
-        request(query, function (error, response, body) {
-            if (error) {
-            console.log('error:', error); // Print the error if one occurred
-            }
-            console.log('API call statusCode:', response && response.statusCode); // Print the response status code if a response was received
-            // send the result of request call back to client
-            res.writeHead(200, {
-                'Content-Type': 'application/json'
-            });
-            res.end(body);
-          });
+        let query = `https://api.walmartlabs.com/v1/search?apiKey=${walmartAPI}&query=${search}`;
+        queryAPI(query, res);
     } else if (req.url === '/ebay') {
         console.log('ebay');
+        let query = `https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=${ebayAPI}&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=${search}&paginationInput.entriesPerPage=10`;
+        queryAPI(query, res);
+
     } else if (req.url === '/amazon') {
         console.log('amazon');
     }
@@ -66,6 +59,21 @@ const server = http.createServer(function (req, res) {
         res.end("Oops, that page doesn't exist... yet, maybe");
     }
 });
+
+function queryAPI(query, res) {
+    // make API call from server
+    request(query, function (error, response, body) {
+        if (error) {
+            console.log('error:', error); // Print the error if one occurred
+        }
+        console.log('API call statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        // send the result of request call back to client
+        res.writeHead(200, {
+            'Content-Type': 'application/json'
+        });
+        res.end(body);
+    });
+}
 
 server.listen(3000, '127.0.0.1');
 console.log('Server is listening on port 3000...');
