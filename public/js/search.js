@@ -66,6 +66,8 @@ window.onload = function () {
                     data.forEach(element => {
                         console.log(JSON.parse(element));
                     });
+                    displayWalmartResults(JSON.parse(data[0]));
+                    displayEbayResults(JSON.parse(data[0]));
                 } else if (store === 'walmart') {
                     console.log(data);
                     displayWalmartResults(data);
@@ -114,22 +116,22 @@ window.onload = function () {
         ebayResults.forEach(function (element) {
             const li = document.createElement('li');
             const a = document.createElement('a');
-            //a.setAttribute('href', element.productUrl);
+            a.setAttribute('href', element.viewItemURL[0]);
             li.appendChild(a);
             ul.appendChild(li);
 
             const img = document.createElement('img');
             img.setAttribute('src', element.galleryURL[0]);
-            li.appendChild(img);
-            // const h2 = document.createElement('h2');
-            // const titleText = document.createTextNode(element.name);
-            // h2.appendChild(titleText);
-            // li.appendChild(h2);
+            a.appendChild(img);
+            const h2 = document.createElement('h2');
+            const titleText = document.createTextNode(element.title[0]);
+            h2.appendChild(titleText);
+            a.appendChild(h2);
 
-            // const p = document.createElement('p');
-            // const priceText = document.createTextNode('Price: $' + element.salePrice + ' USD');
-            // p.appendChild(priceText);
-            // li.appendChild(p);
+            const p = document.createElement('p');
+            const priceText = document.createTextNode('Price: $' + element.sellingStatus[0].currentPrice[0].__value__ + ' USD');
+            p.appendChild(priceText);
+            a.appendChild(p);
         })
     };
 };
