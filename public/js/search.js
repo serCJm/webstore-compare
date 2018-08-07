@@ -10,12 +10,28 @@ window.onload = function () {
     // set default store API request option
     let store = 'walmart';
 
+    // listen for screen changes
+    if (matchMedia) {
+        // get screen size 
+        const mq = window.matchMedia("(min-width: 800px)");
+        mq.addListener(widthChange);
+        widthChange(mq);
+    }
+    // on screen width change, change default request option
+    function widthChange(mq) {
+        if (mq.matches) {
+            store = 'all';
+        } else {
+            store = 'walmart';
+        }
+    }
+
     // set a store option depending on user's choice
     (function setStoreOption() {
         const options = document.querySelectorAll('.option');
         for (let i = 0; i < options.length; i++) {
             // change store option on click
-            options[i].addEventListener('click', function(e) {
+            options[i].addEventListener('click', function (e) {
                 e.preventDefault();
                 store = this.text.toLowerCase();
                 console.log(store);
@@ -35,16 +51,27 @@ window.onload = function () {
     // fetch a request to a given url
     // and receive a response
     function sendQuery(endPoint) {
-        const request = new Request(endPoint, {headers: {
-            "Content-Type": "application/json; charset=utf-8"
-        }});
+        const request = new Request(endPoint, {
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            }
+        });
 
         fetch(request).then(function (res) {
                 return res.json();
             })
             .then(function (data) {
-                console.log(data);
+                // console.log(data);
+                if (store === 'all') {
+                data.forEach(element => {
+                    console.log(JSON.parse(element));
+                });
+            } else {
+
+            }
             })
             .catch(err => console.log(err));
     }
+
+    
 };

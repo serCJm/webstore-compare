@@ -3,7 +3,8 @@ const http = require('http'),
     fs = require('fs'),
     dotenv = require('dotenv').config()
 url = require('url'),
-    request = require('request');
+    request = require('request'),
+    requestPromise = require('request-promise-native');
 
 const walmartAPI = process.env.WALMARTAPI;
 const ebayAPI = process.env.EBAYAPI;
@@ -45,11 +46,22 @@ const server = http.createServer(function (req, res) {
         console.log('ebay');
         let query = `https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=${ebayAPI}&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=${search}&paginationInput.entriesPerPage=10`;
         queryAPI(query, res);
+    } else if (req.url === '/all') {
+        console.log('all');
+        let queries = [`https://api.walmartlabs.com/v1/search?apiKey=${walmartAPI}&query=${search}`, `https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=${ebayAPI}&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=${search}&paginationInput.entriesPerPage=10`];
 
-    } else if (req.url === '/amazon') {
-        console.log('amazon');
+        // send request to all queries using a promise
+        Promise.all(queries.map(function (query) {
+            // send request using request-promise-native
+            return requestPromise(query).catch(err => console.log(err));
+        })).then(function(result) {
+            // forward result to client
+            res.writeHead(200, {
+                'Content-Type': 'application/json'
+            });
+            res.end(JSON.stringify(result));
+        }).catch(err => console.log(err));
     }
-
     // handle all non-existing routes
     else {
         console.log('Not found');
