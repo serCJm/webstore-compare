@@ -33,6 +33,12 @@ window.onload = function () {
             // change store option on click
             options[i].addEventListener('click', function (e) {
                 e.preventDefault();
+                for (let option of options) {
+                    if (option.classList.contains('option-active')) {
+                        option.classList.toggle('option-active');
+                    }
+                }
+                this.classList.toggle('option-active');
                 store = this.text.toLowerCase();
                 console.log(store);
             })
@@ -61,18 +67,18 @@ window.onload = function () {
                 return res.json();
             })
             .then(function (data) {
-                // console.log(data);
-                if (store === 'all') {
-                    data.forEach(element => {
-                        console.log(JSON.parse(element));
-                    });
-                    displayWalmartResults(JSON.parse(data[0]));
-                    displayEbayResults(JSON.parse(data[0]));
-                } else if (store === 'walmart') {
-                    console.log(data);
-                    displayWalmartResults(data);
-                } else {
+                console.log(data);
+                // display ebay results
+                if (store === 'ebay') {
                     displayEbayResults(data);
+                    // display walmart results
+                } else if (store === 'walmart') {
+                    displayWalmartResults(data);
+                    // if option set to all
+                    // display results for all
+                } else {
+                    displayWalmartResults(JSON.parse(data[0]));
+                    displayEbayResults(JSON.parse(data[1]));
                 }
             })
             .catch(err => console.log(err));
@@ -134,4 +140,18 @@ window.onload = function () {
             a.appendChild(p);
         })
     };
+
+    // animate help button
+    const menuIcon = document.querySelector('.tooltip-help');
+    menuIcon.addEventListener('click', function () {
+        let menuLines = document.querySelectorAll('.burg');
+        for (let line of menuLines) {
+            if (line.classList.contains('animate') || line.classList.contains('reverse')) {
+                line.classList.toggle('animate');
+                line.classList.toggle('reverse');
+            } else {
+                line.classList.toggle('animate');
+            }
+        }
+    });
 };

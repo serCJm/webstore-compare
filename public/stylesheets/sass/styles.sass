@@ -1,0 +1,76 @@
+@import "vars", "typography", "resets", "media-queries"
+
+// elements
+@import "burger"
+
+html
+    background-color: $gray
+    height: 100%
+.fonta
+    background: $gray
+    height: 2rem
+    height: 100%
+
+body
+    background-color: $white
+    width: 80%
+    margin: 0 auto
+    height: 100%
+
+.head
+    display: flex
+    justify-content: space-between
+    height: 3.5rem
+    align-items: center
+    margin-bottom: 3%
+    .logo
+        margin: 0 10%
+    .tooltip-help
+        background: none
+        width: 5rem
+        padding-right: .5rem
+        display: flex
+        justify-content: space-between
+        align-items: center
+        cursor: pointer
+        &:focus
+            padding-right: .5rem
+
+.search
+    display: flex
+    justify-content: center
+    flex-wrap: wrap
+    margin-bottom: 2rem
+    &-field
+        width: 75%
+        border: 0
+        border-top-left-radius: 5px
+        border-bottom-left-radius: 5px
+        padding-left: 1rem
+    .fonta, &-field
+        background: $gray
+        height: 2rem
+        border-bottom: 1px solid $charcoal
+    .fonta
+        padding-right: 1rem
+    &-btn
+        border-top-right-radius: 5px
+        border-bottom-right-radius: 5px
+        background: $blue
+        padding: 0 .5rem
+        &:hover
+            background: $gray
+
+.options
+    display: flex
+    justify-content: space-around
+    height: 2rem
+    text-transform: uppercase
+    
+
+        
+        
+        
+        
+    
+        

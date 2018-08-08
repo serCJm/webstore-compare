@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="CJ">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv='pragma' content='no-cache'>
+    <script defer src="https://use.fontawesome.com/releases/v5.2.0/js/all.js" integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="public/stylesheets/styles.css">
     <script src="/public/js/search.js"></script>
     <title>Webstore Compare</title>
 </head>
+
 <body>
-    <header>
+    <header class="head">
         <h1 class="logo">Webstore Compare</h1>
-        <button class="tooltip-help">Help</button>
+        <button class="tooltip-help" type="button">Help
+            <div class="burger">
+                <div class="burg burger-1"></div>
+                <div class="burg burger-2"></div>
+                <div class="burg burger-3"></div>
+            </div>
+        </button>
     </header>
     <main>
-        <form action=""><input id="input" type="text"><button class="search-btn">Search</button></form>
+        <form class="search" action="#">
+            <input class="search-field" id="input" type="text" placeholder="Search Item">
+            <span class="fonta"><i class="fab fa-searchengin fa-lg" data-fa-transform="down-3.5"></i></span>
+            <button class="search-btn">Search</button>
+        </form>
         <section class="options">
-            <a href="" class="option">Walmart</a>
-            <a href="" class="option">eBay</a>
+            <a href="#" class="option option-active">Walmart</a>
+            <a href="#" class="option">eBay</a>
         </section>
         <section class="results">
             <div id="walmart" class="result"></div>
@@ -27,4 +40,5 @@
         </section>
     </main>
 </body>
+
 </html>
