@@ -18,16 +18,36 @@ h4
 p
     font-size: 1rem
 
+body, .search-btn
+    font-family: 'Kanit', sans-serif
+    font-weight: bold
+
+.logo
+    font-family: 'Anton', sans-serif
+    &-accent
+        color: $blue
+
 .tooltip-help
     text-transform: uppercase
     font-weight: bold
     color: $blue
 
+.search-field
+    font-weight: bold
+    &::placeholder
+        font-weight: bold
+
 .fonta
-    color: $grayFont
+    color: $grayDark
+
+.search-btn
+    color: $white
+    text-transform: uppercase
+    &:hover
+        color: $blue
     
 .options
-    font-weight: bold
+    
     .option
         color: $blue
         text-decoration: none
@@ -35,3 +55,14 @@ p
         color: $blue
     .option-active
         color: $grayDark
+
+.result
+    &-item
+        color: $grayFont
+        &:visited
+            color: $grayFont
+    &-price
+        font-family: 'Anton', sans-serif
+        color: $grayDark
+        font-weight: 200
+        letter-spacing: 2px

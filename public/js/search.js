@@ -48,6 +48,14 @@ window.onload = function () {
     const searchBtn = document.querySelector('.search-btn');
     searchBtn.addEventListener('click', function (e) {
         e.preventDefault();
+        // remove previous search results
+        let walmartResults = document.querySelector('#walmart');
+        let ebayResults = document.querySelector('#ebay');
+        if (walmartResults.firstChild) {
+            walmartResults.removeChild(walmartResults.firstChild);
+        } else if (ebayResults.firstChild) {
+            ebayResults.removeChild(ebayResults.firstChild);
+        }
         // build a query from input
         let query = `/${store}?search=${input.value}`
         console.log(query);
@@ -67,18 +75,23 @@ window.onload = function () {
                 return res.json();
             })
             .then(function (data) {
+                console.log(store);
                 console.log(data);
                 // display ebay results
                 if (store === 'ebay') {
+                    console.log('shouldnt run');
                     displayEbayResults(data);
                     // display walmart results
                 } else if (store === 'walmart') {
+                    console.log('shouldnt run');
                     displayWalmartResults(data);
                     // if option set to all
                     // display results for all
                 } else {
-                    displayWalmartResults(JSON.parse(data[0]));
-                    displayEbayResults(JSON.parse(data[1]));
+                    let walmartData = JSON.parse(data[0]);
+                    let ebayData = JSON.parse(data[1]);
+                    displayWalmartResults(walmartData);
+                    displayEbayResults(ebayData);
                 }
             })
             .catch(err => console.log(err));
@@ -93,22 +106,34 @@ window.onload = function () {
         walmartResults.forEach(function (element) {
             const li = document.createElement('li');
             const a = document.createElement('a');
+            a.classList.add('result-item');
             a.setAttribute('href', element.productUrl);
+            a.setAttribute('target', '_blank');
             li.appendChild(a);
             ul.appendChild(li);
 
+            const imgDiv = document.createElement('div');
             const img = document.createElement('img');
-            img.setAttribute('src', element.imageEntities[0].thumbnailImage);
-            a.appendChild(img);
+            imgDiv.classList.add('result-img');
+            img.setAttribute('src', element.largeImage);
+            img.setAttribute('width', 100);
+            img.setAttribute('height', 100);
+            imgDiv.appendChild(img);
+            a.appendChild(imgDiv);
+            const div = document.createElement('div');
+            div.classList.add('result-text');
             const h2 = document.createElement('h2');
+            h2.classList.add('result-title');
             const titleText = document.createTextNode(element.name);
             h2.appendChild(titleText);
-            a.appendChild(h2);
+            div.appendChild(h2);
+            a.appendChild(div);
 
             const p = document.createElement('p');
+            p.classList.add('result-price');
             const priceText = document.createTextNode('Price: $' + element.salePrice + ' USD');
             p.appendChild(priceText);
-            a.appendChild(p);
+            div.appendChild(p);
         });
     }
 
@@ -122,22 +147,34 @@ window.onload = function () {
         ebayResults.forEach(function (element) {
             const li = document.createElement('li');
             const a = document.createElement('a');
+            a.classList.add('result-item');
             a.setAttribute('href', element.viewItemURL[0]);
+            a.setAttribute('target', '_blank');
             li.appendChild(a);
             ul.appendChild(li);
 
+            const imgDiv = document.createElement('div');
             const img = document.createElement('img');
+            imgDiv.classList.add('result-img');
             img.setAttribute('src', element.galleryURL[0]);
-            a.appendChild(img);
+            img.setAttribute('width', 100);
+            img.setAttribute('height', 100);
+            imgDiv.appendChild(img);
+            a.appendChild(imgDiv);
+            const div = document.createElement('div');
+            div.classList.add('result-text');
             const h2 = document.createElement('h2');
+            h2.classList.add('result-title');
             const titleText = document.createTextNode(element.title[0]);
             h2.appendChild(titleText);
-            a.appendChild(h2);
+            div.appendChild(h2);
+            a.appendChild(div);
 
             const p = document.createElement('p');
+            p.classList.add('result-price');
             const priceText = document.createTextNode('Price: $' + element.sellingStatus[0].currentPrice[0].__value__ + ' USD');
             p.appendChild(priceText);
-            a.appendChild(p);
+            div.appendChild(p);
         })
     };
 

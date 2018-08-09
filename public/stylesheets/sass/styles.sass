@@ -15,26 +15,27 @@ body
     background-color: $white
     width: 80%
     margin: 0 auto
-    height: 100%
+    min-height: 100%
+    overflow: auto
 
 .head
     display: flex
     justify-content: space-between
     height: 3.5rem
     align-items: center
-    margin-bottom: 3%
+    margin-bottom: 5%
     .logo
         margin: 0 10%
     .tooltip-help
+        flex: 0 0 4rem
         background: none
-        width: 5rem
-        padding-right: .5rem
+        width: 4rem
+        padding: 0 .5rem
         display: flex
         justify-content: space-between
         align-items: center
         cursor: pointer
-        &:focus
-            padding-right: .5rem
+        
 
 .search
     display: flex
@@ -49,23 +50,49 @@ body
         padding-left: 1rem
     .fonta, &-field
         background: $gray
-        height: 2rem
+        height: 2.5rem
         border-bottom: 1px solid $charcoal
     .fonta
         padding-right: 1rem
     &-btn
+        border: 1px solid transparent
         border-top-right-radius: 5px
         border-bottom-right-radius: 5px
         background: $blue
         padding: 0 .5rem
+        cursor: pointer
+        &:active, &:focus
+            background: $blue
         &:hover
             background: $gray
+            border: 1px solid $charcoal
 
 .options
     display: flex
     justify-content: space-around
     height: 2rem
     text-transform: uppercase
+
+.result
+    &-img
+        width: 100px
+        height: 100px
+        margin-right: 2rem
+    &-item
+        display: flex
+        margin: 0
+        padding: 1rem 2rem
+        border-top: 1px solid $charcoal
+        cursor: pointer
+    &-text
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+    &-title, &-price
+        margin: 0
+    
+
+    
     
 
         
