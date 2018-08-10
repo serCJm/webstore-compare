@@ -75,6 +75,8 @@ window.onload = function () {
         } else if (ebayResults.firstChild) {
             ebayResults.removeChild(ebayResults.firstChild);
         }
+        // display loader
+        toggleLoader();
         // build a query from input
         let query = `/${store}?search=${input.value}`
         console.log(query);
@@ -94,6 +96,7 @@ window.onload = function () {
                 return res.json();
             })
             .then(function (data) {
+                toggleLoader();
                 console.log(store);
                 console.log(data);
                 // display ebay results
@@ -213,4 +216,9 @@ window.onload = function () {
         modal.classList.toggle('modal-inactive');
         modal.classList.toggle('modal-active');
     });
+
+    function toggleLoader() {
+        const loader = document.querySelector('.loader');
+        loader.classList.toggle('loader-active');
+    }
 };
