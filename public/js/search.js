@@ -200,7 +200,8 @@ window.onload = function () {
     // animate help button
     const menuIcon = document.querySelector('.tooltip-help');
     menuIcon.addEventListener('click', function () {
-        let menuLines = document.querySelectorAll('.burg');
+        const menuLines = document.querySelectorAll('.burg');
+        const modal = document.querySelector('#help-modal');
         for (let line of menuLines) {
             if (line.classList.contains('animate') || line.classList.contains('reverse')) {
                 line.classList.toggle('animate');
@@ -209,5 +210,7 @@ window.onload = function () {
                 line.classList.toggle('animate');
             }
         }
+        modal.classList.toggle('modal-inactive');
+        modal.classList.toggle('modal-active');
     });
 };
