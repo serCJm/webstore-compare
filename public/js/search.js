@@ -1,7 +1,8 @@
 "use strict"
 window.onload = function () {
 
-    let input = document.querySelector('#input');
+    const input = document.querySelector('#input');
+    const options = document.querySelectorAll('.option');
     // clear input field on page reload
     (function clearInput() {
         input.value = '';
@@ -10,6 +11,15 @@ window.onload = function () {
     // set default store API request option
     let store = 'walmart';
 
+    // set a store option depending on user's choice
+    function setStoreOption() {
+        for (let i = 0; i < options.length; i++) {
+            // change store option on click
+            options[i].addEventListener('click', modifyOptionClass);
+        }
+    };
+    setStoreOption();
+
     // listen for screen changes
     if (matchMedia) {
         // get screen size 
@@ -17,33 +27,42 @@ window.onload = function () {
         mq.addListener(widthChange);
         widthChange(mq);
     }
+
     // on screen width change, change default request option
     function widthChange(mq) {
         if (mq.matches) {
             store = 'all';
+            for (let option of options) {
+                // remove event listeners from options
+                option.removeEventListener('click', modifyOptionClass);
+                if (option.classList.contains('option-active')) {
+                    option.classList.toggle('option-active');
+                }
+                option.classList.add('option-inactive');
+            }
         } else {
             store = 'walmart';
+            setStoreOption();
+            options[0].classList.add('option-active');
+            for (let option of options) {
+                if (option.classList.contains('option-inactive')) {
+                    option.classList.remove('option-inactive');
+                }
+
+            }
         }
     }
 
-    // set a store option depending on user's choice
-    (function setStoreOption() {
-        const options = document.querySelectorAll('.option');
-        for (let i = 0; i < options.length; i++) {
-            // change store option on click
-            options[i].addEventListener('click', function (e) {
-                e.preventDefault();
-                for (let option of options) {
-                    if (option.classList.contains('option-active')) {
-                        option.classList.toggle('option-active');
-                    }
-                }
-                this.classList.toggle('option-active');
-                store = this.text.toLowerCase();
-                console.log(store);
-            })
+    function modifyOptionClass() {
+        for (let option of options) {
+            if (option.classList.contains('option-active')) {
+                option.classList.toggle('option-active');
+            }
         }
-    })();
+        this.classList.toggle('option-active');
+        store = this.text.toLowerCase();
+        console.log(store);
+    }
 
     const searchBtn = document.querySelector('.search-btn');
     searchBtn.addEventListener('click', function (e) {
