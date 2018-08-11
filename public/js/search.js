@@ -35,6 +35,7 @@ window.onload = function () {
             for (let option of options) {
                 // remove event listeners from options
                 option.removeEventListener('click', modifyOptionClass);
+                // disable option buttons
                 if (option.classList.contains('option-active')) {
                     option.classList.toggle('option-active');
                 }
@@ -96,6 +97,7 @@ window.onload = function () {
                 return res.json();
             })
             .then(function (data) {
+                // remove loader
                 toggleLoader();
                 console.log(store);
                 console.log(data);
@@ -103,12 +105,12 @@ window.onload = function () {
                 if (store === 'ebay') {
                     console.log('shouldnt run');
                     displayEbayResults(data);
-                    // display walmart results
+                // display walmart results
                 } else if (store === 'walmart') {
                     console.log('shouldnt run');
                     displayWalmartResults(data);
-                    // if option set to all
-                    // display results for all
+                // if option set to all
+                // display results for all
                 } else {
                     let walmartData = JSON.parse(data[0]);
                     let ebayData = JSON.parse(data[1]);
@@ -217,6 +219,7 @@ window.onload = function () {
         modal.classList.toggle('modal-active');
     });
 
+    // display/remove loader
     function toggleLoader() {
         const loader = document.querySelector('.loader');
         loader.classList.toggle('loader-active');
