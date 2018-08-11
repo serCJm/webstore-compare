@@ -5,7 +5,9 @@ const http = require('http'),
 url = require('url'),
     request = require('request'),
     requestPromise = require('request-promise-native');
-
+// set up port for heroku
+const PORT = process.env.PORT || 3000;
+// set up API keys
 const walmartAPI = process.env.WALMARTAPI;
 const ebayAPI = process.env.EBAYAPI;
 
@@ -87,7 +89,7 @@ function queryAPI(query, res) {
     });
 }
 
-server.listen(3000, '127.0.0.1');
+server.listen(PORT, '127.0.0.1');
 console.log('Server is listening on port 3000...');
 
 function errorHandler(err) {
