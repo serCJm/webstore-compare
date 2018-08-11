@@ -90,7 +90,7 @@ function queryAPI(query, res) {
 }
 
 server.listen(PORT, '127.0.0.1');
-console.log('Server is listening on port 3000...');
+console.log(`Server is listening on port ${PORT}...`);
 
 function errorHandler(err) {
     console.log(err);
