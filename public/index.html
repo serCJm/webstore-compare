@@ -1,55 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="author" content="CJ">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv='pragma' content='no-cache'>
-    <script defer src="https://use.fontawesome.com/releases/v5.2.0/js/all.js" integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Anton|Kanit" rel="stylesheet"> 
-    <link rel="stylesheet" href="public/stylesheets/styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="CJ" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"
+      integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Anton|Kanit"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="public/stylesheets/styles.min.css" />
     <script src="/public/js/search.js"></script>
     <title>Webstore Compare</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header class="head">
-        <h1 class="logo">Web<span class="logo-accent"><i class="fas fa-hand-holding-usd fa-sm" data-fa-transform="down-4"></i></span>tore Compare</h1>
-        <button class="tooltip-help" type="button">Help 
-            <div class="burger">
-                <div class="burg burger-1"></div>
-                <div class="burg burger-2"></div>
-                <div class="burg burger-3"></div>
-            </div>
-        </button>
-        <div id="help-modal" class="modal-inactive">
-            <div class="help-content">
-                <p class="help-text">Webstore Compare is a web app that allows to you compare prices on Walmart and Ebay stores.</p>
-                <p class="help-text">On mobile versions of the app, simply pick your store (default being Walmart), type in your keyword, and press search.</p>
-                <p class="help-text">On desktop versions, results for both stores are displayed by default.</p>
-                <p class="help-text">Note, results may vary and depend on each store individual search engine.</p>
-                <p class="help-text">Happy Shopping!</p>
-            </div>
+      <h1 class="logo">
+        Web<span class="logo-accent"
+          ><i
+            class="fas fa-hand-holding-usd fa-sm"
+            data-fa-transform="down-4"
+          ></i></span
+        >tore Compare
+      </h1>
+      <button class="tooltip-help" type="button">
+        Help
+        <div class="burger">
+          <div class="burg burger-1"></div>
+          <div class="burg burger-2"></div>
+          <div class="burg burger-3"></div>
         </div>
+      </button>
+      <div id="help-modal" class="modal-inactive">
+        <div class="help-content">
+          <p class="help-text">
+            Webstore Compare is a web app that allows to you compare prices on
+            Walmart and Ebay stores.
+          </p>
+          <p class="help-text">
+            On mobile versions of the app, simply pick your store (default being
+            Walmart), type in your keyword, and press search.
+          </p>
+          <p class="help-text">
+            On desktop versions, results for both stores are displayed by
+            default.
+          </p>
+          <p class="help-text">
+            Note, results may vary and depend on each store individual search
+            engine.
+          </p>
+          <p class="help-text">Happy Shopping!</p>
+        </div>
+      </div>
     </header>
     <main>
-        <form class="search" action="#">
-            <input class="search-field" id="input" type="text" placeholder="Search Item">
-            <span class="fonta"><i class="fab fa-searchengin fa-lg" data-fa-transform="down-7"></i></span>
-            <button class="search-btn">Search</button>
-        </form>
-        <section class="options">
-            <a href="#" class="option">Walmart</a>
-            <a href="#" class="option">eBay</a>
-        </section>
-        <section class="results">
-            <div id="walmart" class="result"></div>
-            <div id="ebay" class="result"></div>
-            <div class="loader"></div>
-        </section>
+      <form class="search" action="#">
+        <input
+          class="search-field"
+          id="input"
+          type="text"
+          placeholder="Search Item"
+        />
+        <span class="fonta"
+          ><i class="fab fa-searchengin fa-lg" data-fa-transform="down-7"></i
+        ></span>
+        <button class="search-btn">Search</button>
+      </form>
+      <section class="options">
+        <a href="#" class="option">Walmart</a>
+        <a href="#" class="option">eBay</a>
+      </section>
+      <section class="results">
+        <div id="walmart" class="result"></div>
+        <div id="ebay" class="result"></div>
+        <div class="loader"></div>
+      </section>
     </main>
-</body>
-
+  </body>
 </html>
