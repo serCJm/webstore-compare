@@ -69,11 +69,9 @@ window.onload = function() {
 		// remove previous search results
 		let walmartResults = document.querySelector("#walmart");
 		let ebayResults = document.querySelector("#ebay");
-		if (walmartResults.firstChild) {
+		if (walmartResults.firstChild)
 			walmartResults.removeChild(walmartResults.firstChild);
-		} else if (ebayResults.firstChild) {
-			ebayResults.removeChild(ebayResults.firstChild);
-		}
+		if (ebayResults.firstChild) ebayResults.removeChild(ebayResults.firstChild);
 		// display loader
 		toggleLoader();
 		// build a query from input
