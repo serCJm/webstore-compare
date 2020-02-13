@@ -1,6 +1,6 @@
-# <a href="http://webstore-compare.herokuapp.com/">Webstore Price Compare</a>
+# <a href="https://webstore-compare.herokuapp.com/">Webstore Price Compare</a>
 
-Webstore price compare is a responsive web app that allows a user to check and compare prices on Walmart and eBay US. 
+Webstore price compare is a responsive web app that allows a user to check and compare prices on Walmart and eBay US.
 
 Fetch API is used client-side to send AJAX requests. Node.js (bare, no Express) routing is used to hide API keys and retrieve requested data.
 
