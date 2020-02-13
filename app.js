@@ -2,10 +2,7 @@
 const http = require("http"),
 	fs = require("fs"),
 	dotenv = require("dotenv").config();
-(url = require("url")),
-	(request = require("request")),
-	(requestPromise = require("request-promise-native")),
-	(fetch = require("node-fetch"));
+(url = require("url")), (fetch = require("node-fetch"));
 // set up port for heroku
 const PORT = process.env.PORT || 3000;
 // set up API keys
