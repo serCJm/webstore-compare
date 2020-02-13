@@ -100,9 +100,11 @@ window.onload = function() {
 				console.log(data);
 				// display ebay results
 				if (store === "ebay") {
+					console.log("shouldnt run");
 					displayEbayResults(data);
 					// display walmart results
 				} else if (store === "walmart") {
+					console.log("shouldnt run");
 					displayWalmartResults(data);
 					// if option set to all
 					// display results for all
@@ -122,40 +124,53 @@ window.onload = function() {
 		resultDiv.appendChild(ul);
 
 		const walmartResults = data.items;
-		walmartResults.forEach(function(element) {
-			const li = document.createElement("li");
-			const a = document.createElement("a");
-			a.classList.add("result-item");
-			a.setAttribute("href", element.productUrl);
-			a.setAttribute("target", "_blank");
-			li.appendChild(a);
-			ul.appendChild(li);
-
-			const imgDiv = document.createElement("div");
-			const img = document.createElement("img");
-			imgDiv.classList.add("result-img");
-			img.setAttribute("src", element.largeImage);
-			img.setAttribute("width", 100);
-			img.setAttribute("height", 100);
-			imgDiv.appendChild(img);
-			a.appendChild(imgDiv);
-			const div = document.createElement("div");
-			div.classList.add("result-text");
-			const h2 = document.createElement("h2");
-			h2.classList.add("result-title");
-			const titleText = document.createTextNode(element.name);
-			h2.appendChild(titleText);
-			div.appendChild(h2);
-			a.appendChild(div);
-
+		if (!walmartResults) {
 			const p = document.createElement("p");
 			p.classList.add("result-price");
-			const priceText = document.createTextNode(
-				"Price: $" + element.salePrice + " USD"
+			p.setAttribute("style", "text-align: center");
+			const text = document.createTextNode(
+				"No Results Found. Try Another Search."
 			);
-			p.appendChild(priceText);
-			div.appendChild(p);
-		});
+			p.appendChild(text);
+			const li = document.createElement("li");
+			li.appendChild(p);
+			ul.appendChild(li);
+		} else {
+			walmartResults.forEach(function(element) {
+				const li = document.createElement("li");
+				const a = document.createElement("a");
+				a.classList.add("result-item");
+				a.setAttribute("href", element.productUrl);
+				a.setAttribute("target", "_blank");
+				li.appendChild(a);
+				ul.appendChild(li);
+
+				const imgDiv = document.createElement("div");
+				const img = document.createElement("img");
+				imgDiv.classList.add("result-img");
+				img.setAttribute("src", element.largeImage);
+				img.setAttribute("width", 100);
+				img.setAttribute("height", 100);
+				imgDiv.appendChild(img);
+				a.appendChild(imgDiv);
+				const div = document.createElement("div");
+				div.classList.add("result-text");
+				const h2 = document.createElement("h2");
+				h2.classList.add("result-title");
+				const titleText = document.createTextNode(element.name);
+				h2.appendChild(titleText);
+				div.appendChild(h2);
+				a.appendChild(div);
+
+				const p = document.createElement("p");
+				p.classList.add("result-price");
+				const priceText = document.createTextNode(
+					"Price: $" + element.salePrice + " USD"
+				);
+				p.appendChild(priceText);
+				div.appendChild(p);
+			});
+		}
 	}
 
 	function displayEbayResults(data) {
@@ -166,40 +181,55 @@ window.onload = function() {
 		const ebayResults =
 			data.findItemsByKeywordsResponse[0].searchResult[0].item;
 		console.log(ebayResults);
-		ebayResults.forEach(function(element) {
-			const li = document.createElement("li");
-			const a = document.createElement("a");
-			a.classList.add("result-item");
-			a.setAttribute("href", element.viewItemURL[0]);
-			a.setAttribute("target", "_blank");
-			li.appendChild(a);
-			ul.appendChild(li);
-
-			const imgDiv = document.createElement("div");
-			const img = document.createElement("img");
-			imgDiv.classList.add("result-img");
-			img.setAttribute("src", element.galleryURL[0]);
-			img.setAttribute("width", 100);
-			img.setAttribute("height", 100);
-			imgDiv.appendChild(img);
-			a.appendChild(imgDiv);
-			const div = document.createElement("div");
-			div.classList.add("result-text");
-			const h2 = document.createElement("h2");
-			h2.classList.add("result-title");
-			const titleText = document.createTextNode(element.title[0]);
-			h2.appendChild(titleText);
-			div.appendChild(h2);
-			a.appendChild(div);
-
+		if (!ebayResults) {
 			const p = document.createElement("p");
 			p.classList.add("result-price");
-			const priceText = document.createTextNode(
-				"Price: $" + element.sellingStatus[0].currentPrice[0].__value__ + " USD"
+			p.setAttribute("style", "text-align: center");
+			const text = document.createTextNode(
+				"No Results Found. Try Another Search."
 			);
-			p.appendChild(priceText);
-			div.appendChild(p);
-		});
+			p.appendChild(text);
+			const li = document.createElement("li");
+			li.appendChild(p);
+			ul.appendChild(li);
+		} else {
+			ebayResults.forEach(function(element) {
+				const li = document.createElement("li");
+				const a = document.createElement("a");
+				a.classList.add("result-item");
+				a.setAttribute("href", element.viewItemURL[0]);
+				a.setAttribute("target", "_blank");
+				li.appendChild(a);
+				ul.appendChild(li);
+
+				const imgDiv = document.createElement("div");
+				const img = document.createElement("img");
+				imgDiv.classList.add("result-img");
+				img.setAttribute("src", element.galleryURL[0]);
+				img.setAttribute("width", 100);
+				img.setAttribute("height", 100);
+				imgDiv.appendChild(img);
+				a.appendChild(imgDiv);
+				const div = document.createElement("div");
+				div.classList.add("result-text");
+				const h2 = document.createElement("h2");
+				h2.classList.add("result-title");
+				const titleText = document.createTextNode(element.title[0]);
+				h2.appendChild(titleText);
+				div.appendChild(h2);
+				a.appendChild(div);
+
+				const p = document.createElement("p");
+				p.classList.add("result-price");
+				const priceText = document.createTextNode(
+					"Price: $" +
+						element.sellingStatus[0].currentPrice[0].__value__ +
+						" USD"
+				);
+				p.appendChild(priceText);
+				div.appendChild(p);
+			});
+		}
 	}
 
 	// animate help button
