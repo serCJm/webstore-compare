@@ -63,21 +63,14 @@ const server = http.createServer(function(req, res) {
 		];
 
 		// send request to all queries using a promise
-		Promise.all(
-			queries.map(function(query) {
-				// send request using request-promise-native
-				// return requestPromise(query).catch(err => console.log(err));
-				return fetch(query)
-					.then(res => res.json())
-					.catch(err => console.log(err));
-			})
-		)
-			.then(function(result) {
+		Promise.all(queries.map(query => fetch(query)))
+			.then(responses => Promise.all(responses.map(res => res.text())))
+			.then(texts => {
 				// forward result to client
 				res.writeHead(200, {
 					"Content-Type": "application/json"
 				});
-				res.end(result);
+				res.end(JSON.stringify(texts));
 			})
 			.catch(err => console.log(err));
 	}
